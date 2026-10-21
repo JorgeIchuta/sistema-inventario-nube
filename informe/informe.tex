@@ -1,0 +1,544 @@
+\documentclass[12pt,a4paper]{article}
+
+% ------------------------------------------------------------
+% Proyecto: Sistema multiplataforma de inventario en la nube
+% Compile con: pdflatex informe; pdflatex informe
+% Imagenes necesarias en esta carpeta: umsa.jpg, logo-inventario.png,
+% panel-escritorio.png, venta-movil.png
+% ------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{top=2.5cm,bottom=2.5cm,left=3cm,right=2.5cm}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,calc}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\definecolor{umsablue}{HTML}{123B66}
+\definecolor{lightblue}{HTML}{EAF2F8}
+\definecolor{cloudblue}{HTML}{1E88C8}
+\definecolor{softorange}{HTML}{FCEBD9}
+\definecolor{softred}{HTML}{F8DEDE}
+
+\hypersetup{
+  pdftitle={Sistema multiplataforma de inventario para una tienda con base de datos en la nube},
+  pdfauthor={Jorge Alberto Ichuta Tuco, Alex Ronaldo Huayllucu Huayllucu, Jos\'e Fernando Ignacio Mamani, David Jhon Mamani Vallejo, Cesar Raymundo Claros Choquemisa},
+  pdfsubject={Proyecto de la materia -- Computacion en la Nube},
+  colorlinks=true, linkcolor=umsablue, citecolor=umsablue, urlcolor=umsablue
+}
+
+\titleformat{\section}{\Large\bfseries\color{umsablue}}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\large\bfseries\color{umsablue}}{\thesubsection}{0.7em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{umsablue}}{\thesubsubsection}{0.7em}{}
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0.15em}
+\setlist{nosep,leftmargin=1.2cm}
+\captionsetup{font=small,labelfont={bf,color=umsablue}}
+\crefname{table}{cuadro}{cuadros}
+\Crefname{table}{Cuadro}{Cuadros}
+\crefname{figure}{figura}{figuras}
+\Crefname{figure}{Figura}{Figuras}
+\crefname{section}{secci\'on}{secciones}
+\Crefname{section}{Secci\'on}{Secciones}
+\crefname{subsection}{secci\'on}{secciones}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Computaci\'on en la Nube}
+\fancyhead[R]{Inventario Cloud}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{15pt}
+
+% Caja para resaltar ideas
+\newtcolorbox{destacado}[1][]{
+  colback=lightblue, colframe=umsablue, fonttitle=\bfseries,
+  boxrule=0.6pt, arc=2pt, title=#1
+}
+
+\newcommand{\materia}{Computaci\'on en la Nube}
+\newcommand{\tituloTrabajo}{Sistema multiplataforma de inventario para una tienda con base de datos en la nube}
+\newcommand{\estudiante}{Jorge Alberto Ichuta Tuco}
+\newcommand{\docente}{Ph. D. Jos\'e Mar\'ia Tapia Baltazar}
+\newcommand{\universidad}{Universidad Mayor de San Andr\'es}
+\newcommand{\facultad}{Facultad de Ciencias Puras y Naturales}
+\newcommand{\carrera}{Carrera de Inform\'atica}
+
+\begin{document}
+
+%=============================================================================
+% 1. CARATULA
+%=============================================================================
+\begin{titlepage}
+  \centering
+  \vspace*{0.3cm}
+  {\color{umsablue}\rule{0.88\textwidth}{1.1pt}\par}
+  \vspace{0.4cm}
+  {\Large\bfseries\color{umsablue}\universidad\par}
+  \vspace{0.12cm}
+  {\large\facultad\par}
+  \vspace{0.08cm}
+  {\large\carrera\par}
+  \vspace{0.55cm}
+
+  % Guarde el escudo como umsa.png, umsa.jpg o umsa.pdf en esta misma carpeta.
+  \IfFileExists{umsa.png}{\includegraphics[width=3.8cm,height=3.8cm,keepaspectratio]{umsa.png}}{%
+    \IfFileExists{umsa.jpg}{\includegraphics[width=3.8cm,height=3.8cm,keepaspectratio]{umsa.jpg}}{%
+      \IfFileExists{umsa.pdf}{\includegraphics[width=3.8cm,height=3.8cm,keepaspectratio]{umsa.pdf}}{%
+        \fbox{\parbox[c][3.6cm][c]{3.6cm}{\centering Imagen del escudo\\\texttt{umsa}}}%
+      }%
+    }%
+  }
+  \vspace{0.5cm}
+
+  \begin{minipage}{0.88\textwidth}
+    \centering
+    {\LARGE\bfseries\color{umsablue} \tituloTrabajo\par}
+    \vspace{0.25cm}
+    {\large\itshape Inventario Cloud\par}
+  \end{minipage}
+
+  \vspace{0.5cm}
+  {\color{umsablue}\rule{0.7\textwidth}{0.6pt}\par}
+  \vspace{0.45cm}
+  {\large\bfseries Proyecto de la materia\par}
+  \vspace{0.6cm}
+
+  \begin{minipage}{0.8\textwidth}
+    \renewcommand{\arraystretch}{1.5}
+    \centering
+    \begin{tabular}{@{}>{\bfseries\color{umsablue}}r@{\hspace{0.8cm}}l@{}}
+      Materia: & \materia \\
+      Estudiantes: & \estudiante \\
+      & Alex Ronaldo Huayllucu Huayllucu \\
+      & Jos\'e Fernando Ignacio Mamani \\
+      & David Jhon Mamani Vallejo \\
+      & Cesar Raymundo Claros Choquemisa \\
+      Docente: & \docente \\
+    \end{tabular}
+  \end{minipage}
+
+  \vfill
+  {La Paz -- Bolivia, octubre de 2026\par}
+  \vspace{0.2cm}
+  {\color{umsablue}\rule{0.88\textwidth}{1.1pt}\par}
+\end{titlepage}
+
+\pagenumbering{arabic}
+
+%=============================================================================
+\section{Introducci\'on}
+%=============================================================================
+
+El control del inventario es una de las tareas m\'as importantes de cualquier tienda, porque de \'el dependen las compras a los proveedores, la atenci\'on a los clientes y, en el fondo, saber cu\'anto dinero est\'a guardado en los estantes. A pesar de eso, en muchas tiendas de barrio, minimarkets y negocios peque\~nos de La Paz y El Alto el inventario todav\'ia se lleva en un cuaderno, en una hoja de Excel o en un archivo que vive en una sola computadora.
+
+Este tipo de registro funciona mientras el negocio es peque\~no, pero con el tiempo empieza a fallar: las cantidades anotadas no coinciden con lo que hay en el almac\'en, se repiten registros, se pierden hojas y nadie sabe con certeza qu\'e productos est\'an por agotarse. Adem\'as, si el due\~no est\'a fuera de la tienda o si dos empleados venden al mismo tiempo, no hay forma sencilla de compartir la informaci\'on actualizada.
+
+Durante el semestre, en la materia de Computaci\'on en la Nube, estudiamos c\'omo los servicios en la nube permiten acceder a recursos de c\'omputo y almacenamiento desde cualquier lugar, sin necesidad de comprar ni mantener servidores propios. Tomando esa idea como base, en el presente proyecto proponemos \textbf{Inventario Cloud}, un sistema multiplataforma de inventario para una tienda que funciona como aplicaci\'on Android (instalada mediante un archivo APK) y como aplicaci\'on web desde el navegador de una computadora.
+
+Ambas versiones se desarrollan con \textbf{Flutter} y se conectan a una sola base de datos \textbf{PostgreSQL} alojada en \textbf{Supabase}, utilizando \'unicamente su plan gratuito. As\'i, una venta registrada desde el celular del empleado se refleja en la computadora del administrador, y todo el proyecto puede desarrollarse y demostrarse con un presupuesto de \textbf{Bs~0}.
+
+El documento est\'a organizado de la siguiente manera: en la \cref{sec:marco} se presenta el marco te\'orico que sustenta la propuesta; en la \cref{sec:problematica} se describe la problem\'atica y se identifica el problema central; en la \cref{sec:objetivos} se plantean los objetivos del proyecto; y finalmente, en la \cref{sec:servicios} se detallan los servicios en la nube que utiliza el sistema y los servicios que este ofrece a sus usuarios.
+
+%=============================================================================
+\section{Marco te\'orico}\label{sec:marco}
+%=============================================================================
+
+\subsection{Sistemas de control de inventario}
+
+Un \textbf{inventario} es el conjunto de bienes que una empresa mantiene para venderlos o utilizarlos en sus operaciones \cite{heizer}. Controlarlo significa registrar de forma ordenada todas las \textbf{entradas} (compras o reposiciones de mercader\'ia) y todas las \textbf{salidas} (ventas, mermas o ajustes), de modo que en cualquier momento se conozca la \textbf{existencia} o \textbf{stock} de cada producto. Para nuestro sistema son importantes los siguientes conceptos:
+
+\begin{itemize}
+    \item \textbf{Stock actual:} cantidad disponible de un producto en un momento dado.
+    \item \textbf{Stock m\'inimo:} nivel por debajo del cual conviene reponer el producto para no quedarse sin existencias. Cuando el stock actual es igual o menor que el m\'inimo, el sistema genera una \textbf{alerta de bajo stock}.
+    \item \textbf{Movimiento de inventario:} registro de cada cambio en las existencias, con fecha, usuario, producto, cantidad, tipo (entrada, venta o ajuste), stock anterior y stock resultante. El conjunto de movimientos forma el \textbf{historial} o \textit{kardex} del producto.
+    \item \textbf{Ajuste:} correcci\'on de las existencias cuando el conteo f\'isico no coincide con el registro. En lugar de borrar movimientos, se registra un movimiento nuevo, con lo que se conserva la trazabilidad.
+\end{itemize}
+
+\subsection{Computaci\'on en la nube}
+
+Seg\'un el Instituto Nacional de Est\'andares y Tecnolog\'ia de los Estados Unidos (NIST), la computaci\'on en la nube es un modelo que permite el acceso ubicuo, conveniente y bajo demanda, a trav\'es de la red, a un conjunto compartido de recursos inform\'aticos configurables (redes, servidores, almacenamiento, aplicaciones y servicios), que pueden aprovisionarse y liberarse r\'apidamente con un m\'inimo esfuerzo de gesti\'on \cite{nist}. La misma definici\'on establece cinco \textbf{caracter\'isticas esenciales}:
+
+\begin{enumerate}
+    \item \textbf{Autoservicio bajo demanda:} el usuario obtiene recursos sin intervenci\'on humana del proveedor.
+    \item \textbf{Amplio acceso a la red:} los servicios se consumen desde celulares, computadoras u otros dispositivos a trav\'es de Internet.
+    \item \textbf{Agrupaci\'on de recursos:} el proveedor comparte su infraestructura entre muchos clientes.
+    \item \textbf{Elasticidad r\'apida:} los recursos aumentan o disminuyen seg\'un la necesidad.
+    \item \textbf{Servicio medido:} el consumo se mide y, seg\'un el plan, se cobra o se limita.
+\end{enumerate}
+
+Armbrust et al.\ \cite{armbrust} destacan que la principal ventaja de la nube para organizaciones peque\~nas es que convierte un gasto inicial grande (comprar servidores) en un gasto variable seg\'un el uso, que en proyectos peque\~nos puede llegar a ser nulo gracias a los planes gratuitos.
+
+\subsubsection*{Modelos de servicio}
+
+Los servicios en la nube se clasifican seg\'un cu\'anto de la infraestructura administra el proveedor y cu\'anto el cliente. El \cref{tab:modelos} resume los modelos m\'as conocidos.
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.2cm} X >{\raggedright\arraybackslash}p{3.4cm}}
+\toprule
+\textbf{\color{umsablue}Modelo} & \textbf{\color{umsablue}Qu\'e ofrece el proveedor} & \textbf{\color{umsablue}Ejemplos} \\
+\midrule
+IaaS (Infraestructura como servicio) & M\'aquinas virtuales, almacenamiento y redes; el cliente instala y administra el sistema operativo y las aplicaciones. & Amazon EC2, Google Compute Engine \\
+PaaS (Plataforma como servicio) & Un entorno listo para desplegar aplicaciones sin administrar servidores. & Netlify, Cloudflare Pages \\
+SaaS (Software como servicio) & Aplicaciones completas listas para usar desde el navegador. & GitHub, Gmail, Google Drive \\
+BaaS (Backend como servicio) & Base de datos, autenticaci\'on, API y almacenamiento ya integrados; el desarrollador solo construye la interfaz. & Supabase, Firebase \\
+\bottomrule
+\end{tabularx}
+\caption{Modelos de servicio en la nube.}
+\label{tab:modelos}
+\end{table}
+
+\subsubsection*{Modelos de despliegue}
+
+La nube puede ser \textbf{p\'ublica} (servicios de un proveedor ofrecidos a cualquier cliente por Internet), \textbf{privada} (infraestructura exclusiva de una organizaci\'on), \textbf{comunitaria} (compartida por organizaciones con intereses comunes) o \textbf{h\'ibrida} (combinaci\'on de las anteriores) \cite{nist}. Nuestro sistema utiliza una \textbf{nube p\'ublica} con un modelo \textbf{BaaS}, lo que nos evita comprar y mantener un servidor propio.
+
+\subsection{Supabase como backend en la nube}
+
+Supabase es una plataforma de c\'odigo abierto del tipo BaaS construida sobre PostgreSQL \cite{supabasedocs}. Cada proyecto de Supabase incluye una base de datos PostgreSQL dedicada, un servicio de autenticaci\'on de usuarios, una API REST que se genera autom\'aticamente a partir de las tablas, la posibilidad de llamar funciones de la base de datos (RPC), almacenamiento de archivos, notificaciones en tiempo real y funciones \textit{serverless}. Su plan gratuito permite desarrollar prototipos sin costo, dentro de los l\'imites que se detallan en la \cref{sec:servicios}.
+
+\subsection{Bases de datos relacionales y PostgreSQL}
+
+Una \textbf{base de datos relacional} organiza la informaci\'on en tablas relacionadas mediante claves primarias y for\'aneas, lo que garantiza la \textbf{integridad referencial}: por ejemplo, no puede existir una venta de un producto que no est\'a registrado \cite{silberschatz}. PostgreSQL es un sistema gestor de bases de datos relacional, libre y de c\'odigo abierto \cite{postgres}, que ofrece varias caracter\'isticas que aprovechamos en el proyecto:
+
+\begin{itemize}
+    \item \textbf{Transacciones ACID} (atomicidad, consistencia, aislamiento y durabilidad): una venta con varios productos se guarda completa o no se guarda.
+    \item \textbf{Restricciones} (\texttt{CHECK}, \texttt{UNIQUE}, \texttt{NOT NULL}) que impiden, por ejemplo, existencias negativas o c\'odigos de producto repetidos.
+    \item \textbf{Funciones almacenadas} que ejecutan varias operaciones en una sola transacci\'on, como registrar una venta, descontar el stock y crear el movimiento.
+    \item \textbf{Bloqueo de filas} (\texttt{SELECT \ldots{} FOR UPDATE}) para evitar que dos ventas simult\'aneas vendan la misma \'ultima unidad.
+    \item \textbf{Row Level Security (RLS):} pol\'iticas que deciden, fila por fila, qu\'e datos puede leer o modificar cada usuario seg\'un su rol.
+\end{itemize}
+
+\subsection{API REST, HTTPS y JSON}
+
+Una \textbf{API} (interfaz de programaci\'on de aplicaciones) es el intermediario que permite que la aplicaci\'on se comunique con la base de datos sin conectarse a ella directamente. El estilo arquitect\'onico \textbf{REST}, propuesto por Fielding \cite{fielding}, organiza la comunicaci\'on en recursos a los que se accede con los m\'etodos de HTTP (\texttt{GET}, \texttt{POST}, \texttt{PATCH}, \texttt{DELETE}). En nuestro caso los datos viajan en formato \textbf{JSON} y a trav\'es de \textbf{HTTPS}, que cifra la comunicaci\'on entre el dispositivo y el servidor.
+
+Usar una API tiene una ventaja importante de seguridad: las credenciales de la base de datos nunca se guardan en los celulares ni en las computadoras, y se puede controlar qu\'e operaciones realiza cada usuario.
+
+\subsection{Autenticaci\'on y autorizaci\'on}
+
+La \textbf{autenticaci\'on} comprueba la identidad del usuario (por ejemplo, con correo y contrase\~na), mientras que la \textbf{autorizaci\'on} determina qu\'e puede hacer una vez dentro del sistema. En Supabase, al iniciar sesi\'on el usuario recibe un \textbf{token JWT} \cite{jwt} firmado que acompa\~na a cada petici\'on; la base de datos lee ese token para aplicar las pol\'iticas RLS. Las contrase\~nas no se guardan en texto plano, sino como un \textbf{hash} administrado por el propio servicio de autenticaci\'on.
+
+El sistema aplica un \textbf{control de acceso basado en roles} con dos perfiles: \textbf{administrador}, que gestiona todo el inventario y los usuarios, y \textbf{empleado}, que consulta productos y registra ventas.
+
+\subsection{Desarrollo multiplataforma con Flutter}
+
+Flutter es un \textit{framework} gratuito y de c\'odigo abierto creado por Google que permite construir aplicaciones para Android, iOS, web y escritorio a partir de un \textbf{\'unico c\'odigo fuente} escrito en el lenguaje Dart \cite{flutter}. En este proyecto lo usamos para generar dos versiones del mismo sistema:
+
+\begin{itemize}
+    \item Un archivo \textbf{APK} que se instala directamente en celulares Android, sin necesidad de publicarlo en Google Play.
+    \item Una \textbf{aplicaci\'on web} que se abre desde Chrome, Edge o Firefox en cualquier computadora.
+\end{itemize}
+
+Ambas versiones comparten la l\'ogica del negocio y adaptan la interfaz al tama\~no de la pantalla, lo que se conoce como dise\~no adaptable o \textit{responsive}.
+
+\subsection{Disponibilidad y respaldo de la informaci\'on}
+
+Centralizar los datos en la nube mejora la \textbf{disponibilidad}, porque la informaci\'on puede consultarse desde cualquier lugar con Internet, y la \textbf{sincronizaci\'on}, porque todos los dispositivos trabajan sobre la misma base de datos. Sin embargo, estar en la nube no reemplaza a los \textbf{respaldos}: es necesario exportar peri\'odicamente el esquema y los datos para poder recuperarlos ante un error humano o la p\'erdida del proyecto, m\'as a\'un cuando el plan gratuito no incluye copias autom\'aticas \cite{supabasepricing}.
+
+%=============================================================================
+\section{Problem\'atica -- Identificaci\'on del problema}\label{sec:problematica}
+%=============================================================================
+
+\subsection{Descripci\'on de la situaci\'on actual}
+
+En muchas tiendas peque\~nas y medianas el inventario se administra con cuadernos, hojas de c\'alculo o archivos guardados en una sola computadora. Cada empleado anota las ventas a su manera, las entradas de mercader\'ia se registran tarde (o directamente no se registran) y la \'unica copia de la informaci\'on depende de un solo equipo.
+
+Como consecuencia, el responsable de la tienda no sabe en tiempo real cu\'antas unidades tiene de cada producto. Algunos productos se agotan sin que nadie lo note a tiempo, mientras que otros se compran de m\'as y se quedan en el almac\'en. Revisar el historial de entradas y ventas, o saber qu\'e proveedor trajo cada producto, se vuelve una tarea lenta y poco confiable.
+
+\subsection{Identificaci\'on del problema}
+
+A partir de la situaci\'on descrita identificamos el siguiente \textbf{problema central}:
+
+\begin{destacado}[Problema central]
+La tienda no cuenta con un control centralizado de su inventario, por lo que la informaci\'on sobre existencias, entradas y ventas es poco confiable y no est\'a disponible al mismo tiempo para todos los dispositivos y usuarios.
+\end{destacado}
+
+Para analizarlo utilizamos un \textbf{\'arbol de problemas} (\cref{fig:arbol}), donde en la parte inferior se ubican las causas, al centro el problema y en la parte superior los efectos que produce.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    caja/.style={rectangle, draw=umsablue, thick, rounded corners=3pt, align=center,
+                 text width=2.85cm, minimum height=1.9cm, font=\footnotesize},
+    efecto/.style={caja, fill=softorange},
+    causa/.style={caja, fill=lightblue},
+    central/.style={rectangle, draw=umsablue, very thick, rounded corners=3pt, align=center,
+                    text width=10.5cm, minimum height=1.1cm, fill=softred, font=\small\bfseries},
+    flecha/.style={-{Stealth}, thick, color=umsablue}
+]
+\node[efecto] (e1) at (-5.1, 4) {Existencias desactualizadas};
+\node[efecto] (e2) at (-1.7, 4) {Productos agotados o en exceso};
+\node[efecto] (e3) at (1.7, 4)  {Errores y registros duplicados};
+\node[efecto] (e4) at (5.1, 4)  {P\'erdida de informaci\'on e historial};
+\node[central] (pc) at (0, 2) {Control de inventario descentralizado y poco confiable};
+\node[causa] (c1) at (-5.1, 0) {Registro manual en cuadernos u hojas de c\'alculo};
+\node[causa] (c2) at (-1.7, 0) {Datos guardados en una sola computadora};
+\node[causa] (c3) at (1.7, 0)  {Sin alertas de stock m\'inimo};
+\node[causa] (c4) at (5.1, 0)  {Sin historial ni control de usuarios};
+\foreach \c in {c1, c2, c3, c4} { \draw[flecha] (\c.north) -- (\c.north |- pc.south); }
+\foreach \e in {e1, e2, e3, e4} { \draw[flecha] (\e.south |- pc.north) -- (\e.south); }
+\node[font=\footnotesize\bfseries, color=umsablue, anchor=south] at (0, 5.05) {EFECTOS};
+\node[font=\footnotesize\bfseries, color=umsablue, anchor=north] at (0, -1.05) {CAUSAS};
+\end{tikzpicture}
+\caption{\'Arbol de problemas del control de inventario.}
+\label{fig:arbol}
+\end{figure}
+
+\subsection{An\'alisis de causas y consecuencias}
+
+En el \cref{tab:causas} relacionamos cada causa con su consecuencia y con la forma en que el sistema propuesto la atiende.
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.3cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{\color{umsablue}Causa} & \textbf{\color{umsablue}Consecuencia} & \textbf{\color{umsablue}Respuesta del sistema} \\
+\midrule
+Registro manual de entradas y ventas & Errores de captura, duplicados y stock incorrecto & Formularios con validaci\'on y actualizaci\'on autom\'atica del stock \\
+Informaci\'on en una sola computadora & No se puede consultar desde otros dispositivos; riesgo de p\'erdida & Base de datos \'unica en la nube, accesible desde Android y PC \\
+Ausencia de alertas & Productos agotados sin aviso & Alerta cuando el stock es igual o menor que el m\'inimo \\
+Sin historial de movimientos & No se sabe cu\'ando ni por qu\'e cambi\'o el stock & Registro autom\'atico de cada entrada, venta y ajuste \\
+Sin control de usuarios & Cualquiera puede modificar los datos & Inicio de sesi\'on y permisos por rol \\
+Sin copias de seguridad & P\'erdida definitiva ante una falla & Respaldos manuales peri\'odicos de la base de datos \\
+\bottomrule
+\end{tabularx}
+\caption{Causas, consecuencias y respuesta del sistema propuesto.}
+\label{tab:causas}
+\end{table}
+
+\subsection{Formulaci\'on del problema}
+
+A partir del an\'alisis anterior, formulamos el problema de investigaci\'on con la siguiente pregunta:
+
+\begin{quote}
+\itshape ?`C\'omo centralizar y mantener actualizada la informaci\'on del inventario de una tienda, de forma que pueda consultarse y modificarse de manera segura y sincronizada desde celulares Android y computadoras, sin incurrir en costos de infraestructura?
+\end{quote}
+
+%=============================================================================
+\section{Objetivos}\label{sec:objetivos}
+%=============================================================================
+
+\subsection{Objetivo general}
+
+Desarrollar un sistema multiplataforma de inventario para una tienda, accesible desde celulares Android y computadoras, conectado mediante una API a una base de datos en la nube, que permita registrar, organizar y consultar productos, categor\'ias, proveedores, existencias, entradas y ventas, con el prop\'osito de mejorar el control del inventario, reducir errores y facilitar el acceso sincronizado a la informaci\'on desde diferentes dispositivos.
+
+\subsection{Objetivos espec\'ificos}
+
+\begin{enumerate}
+    \item Dise\~nar una base de datos relacional que almacene la informaci\'on de productos, categor\'ias, proveedores, existencias y movimientos de inventario.
+    \item Dise\~nar una interfaz adaptable que pueda utilizarse desde tel\'efonos celulares y computadoras.
+    \item Implementar las funciones necesarias para registrar, consultar, actualizar y desactivar la informaci\'on del sistema.
+    \item Registrar las entradas de mercader\'ia y las ventas realizadas para mantener actualizadas las existencias de cada producto.
+    \item Generar alertas cuando la cantidad disponible de un producto sea igual o menor que el nivel m\'inimo establecido.
+    \item Mantener un historial de movimientos que permita conocer cu\'ando y por qu\'e aumentaron o disminuyeron las existencias.
+    \item Alojar la base de datos en un servicio de nube para permitir el acceso remoto y centralizado a la informaci\'on.
+    \item Sincronizar los cambios realizados desde celulares y computadoras mediante una \'unica base de datos en la nube.
+    \item Aplicar medidas b\'asicas de seguridad, como autenticaci\'on de usuarios, control de acceso por rol y protecci\'on de las credenciales de conexi\'on.
+    \item Configurar mecanismos de respaldo y recuperaci\'on para disminuir el riesgo de p\'erdida de informaci\'on.
+    \item Realizar pruebas que comprueben el funcionamiento, la disponibilidad y la integridad de los datos almacenados.
+\end{enumerate}
+
+%=============================================================================
+\section{Lista de servicios y su descripci\'on}\label{sec:servicios}
+%=============================================================================
+
+Inventario Cloud se apoya en servicios de nube gratuitos para funcionar y, a su vez, ofrece un conjunto de servicios a los usuarios de la tienda. La \cref{fig:arquitectura} muestra c\'omo se relacionan: los dos clientes (celular y computadora) se comunican por HTTPS con Supabase, que concentra la autenticaci\'on, la API y la base de datos.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    cliente/.style={rectangle, draw=umsablue, thick, rounded corners=3pt, align=center,
+                    text width=3.5cm, minimum height=1.5cm, fill=white, font=\small},
+    servicio/.style={rectangle, draw=umsablue, thick, rounded corners=3pt, align=center,
+                     text width=3.9cm, minimum height=1.5cm, fill=lightblue, font=\small},
+    bd/.style={rectangle, draw=umsablue, very thick, rounded corners=3pt, align=center,
+               text width=7.9cm, minimum height=1.4cm, fill=umsablue!18, font=\small},
+    flecha/.style={-{Stealth}, thick, color=umsablue}
+]
+\node[cliente] (cel) at (0, 1.2) {\textbf{Celular Android}\\ App Flutter (APK)};
+\node[cliente] (pc)  at (0, -1.2) {\textbf{Computadora}\\ App Flutter web};
+\node[servicio] (auth) at (5.9, 1.5) {\textbf{Supabase Auth}\\ inicio de sesi\'on};
+\node[servicio] (api)  at (10.2, 1.5) {\textbf{API REST y RPC}\\ consultas y funciones};
+\node[bd] (pg) at (8.05, -1.0) {\textbf{PostgreSQL}\\ tablas, funciones y pol\'iticas RLS};
+\node[draw=umsablue, dashed, rounded corners=4pt, inner sep=9pt,
+      fit=(auth) (api) (pg), label={[font=\small\bfseries, text=umsablue]above:Supabase Free (nube p\'ublica)}] (sb) {};
+\draw[flecha] (cel.east) -- node[above, font=\footnotesize] {HTTPS} (sb.west |- cel.east);
+\draw[flecha] (pc.east) -- node[above, font=\footnotesize] {JSON} (sb.west |- pc.east);
+\draw[flecha] (auth.south) -- (auth.south |- pg.north);
+\draw[flecha] (api.south) -- (api.south |- pg.north);
+\end{tikzpicture}
+\caption{Arquitectura de servicios de Inventario Cloud.}
+\label{fig:arquitectura}
+\end{figure}
+
+\subsection{Servicios en la nube utilizados}
+
+En el \cref{tab:servicios} describimos cada servicio de nube que utiliza el sistema, el modelo de servicio al que pertenece y la funci\'on que cumple dentro de la soluci\'on.
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.1cm} >{\raggedright\arraybackslash}p{1.5cm} >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{\color{umsablue}Servicio} & \textbf{\color{umsablue}Modelo} & \textbf{\color{umsablue}Descripci\'on y uso en el sistema} \\
+\midrule
+Supabase Database (PostgreSQL) & BaaS & Base de datos relacional en la nube. Guarda usuarios, productos, categor\'ias, proveedores, entradas, ventas y movimientos, y contiene las funciones que registran cada operaci\'on en una sola transacci\'on. \\
+Supabase Auth & BaaS & Autenticaci\'on con correo y contrase\~na. Guarda las contrase\~nas como hash y entrega a cada usuario un token de sesi\'on con el que la base identifica su rol. \\
+API REST de Supabase & BaaS & API generada autom\'aticamente a partir de las tablas. La aplicaci\'on la usa para consultar y modificar cat\'alogos mediante HTTPS y JSON. \\
+Funciones RPC & BaaS & Permiten llamar desde la aplicaci\'on a \texttt{registrar\_entrada}, \texttt{registrar\_venta} y \texttt{registrar\_ajuste}, que validan el stock y actualizan las existencias. \\
+Row Level Security & BaaS & Pol\'iticas que limitan qu\'e filas puede leer o modificar cada rol. Protegen los datos incluso si alguien llama a la API sin usar la aplicaci\'on. \\
+Supabase Storage (opcional) & BaaS & Almacenamiento de archivos para las fotograf\'ias de los productos. \\
+Supabase Realtime (opcional) & BaaS & Avisa a los dispositivos conectados cuando cambian los datos, para actualizar el stock en pantalla sin refrescar. \\
+Supabase Edge Functions (opcional) & FaaS & Funciones \textit{serverless} para tareas con permisos administrativos, como crear cuentas desde la aplicaci\'on. \\
+Netlify o Cloudflare Pages & PaaS & Alojamiento gratuito de la versi\'on web (resultado de \texttt{flutter build web}). \\
+GitHub & SaaS & Repositorio del c\'odigo fuente y de los scripts SQL, con control de versiones y trabajo por ramas. \\
+\bottomrule
+\end{tabularx}
+\caption{Servicios en la nube utilizados por el sistema.}
+\label{tab:servicios}
+\end{table}
+
+Todo el proyecto se dise\~na con un presupuesto de \textbf{Bs~0}. A octubre de 2026, el plan gratuito de Supabase ofrece los recursos del \cref{tab:limites} \cite{supabasepricing}, que son suficientes para el prototipo y la demostraci\'on.
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.9cm} >{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{\color{umsablue}Recurso} & \textbf{\color{umsablue}L\'imite gratuito} & \textbf{\color{umsablue}Consideraci\'on para el proyecto} \\
+\midrule
+Base de datos & 500 MB por proyecto & Suficiente para cientos de productos y movimientos \\
+Almacenamiento de archivos & 1 GB & Solo si se agregan fotos de productos \\
+Transferencia de datos & 5 GB & Las consultas en JSON son peque\~nas \\
+Proyectos activos & 2 & Uno principal y uno para pruebas de recuperaci\'on \\
+Respaldos autom\'aticos & No incluidos & Haremos respaldos manuales \\
+Inactividad & Pausa tras 1 semana sin uso & Ingresar al sistema antes de cada presentaci\'on \\
+\bottomrule
+\end{tabularx}
+\caption{L\'imites del plan gratuito de Supabase.}
+\label{tab:limites}
+\end{table}
+
+\FloatBarrier
+\subsection{Servicios que ofrece el sistema}
+
+Desde el punto de vista del usuario de la tienda, Inventario Cloud ofrece los siguientes servicios:
+
+\begin{description}[leftmargin=0pt, style=nextline, itemsep=0.35em]
+    \item[\color{umsablue}Autenticaci\'on de usuarios] Inicio y cierre de sesi\'on con correo y contrase\~na. Al ingresar, el sistema lee el rol del usuario y muestra solo las funciones que le corresponden.
+    \item[\color{umsablue}Gesti\'on de usuarios y roles] El administrador consulta los usuarios, asigna el rol de administrador o empleado, y activa o desactiva cuentas.
+    \item[\color{umsablue}Gesti\'on de categor\'ias] Registro, consulta, edici\'on y desactivaci\'on de las categor\'ias que agrupan a los productos.
+    \item[\color{umsablue}Gesti\'on de proveedores] Registro y consulta de los proveedores con sus datos de contacto (tel\'efono, correo y direcci\'on).
+    \item[\color{umsablue}Gesti\'on de productos] Registro de productos con c\'odigo \'unico, nombre, categor\'ia, precio de venta, stock actual y stock m\'inimo. Los productos que ya tienen movimientos se desactivan en lugar de eliminarse.
+    \item[\color{umsablue}B\'usqueda de productos] B\'usqueda por nombre o c\'odigo y, como funci\'on opcional, lectura del c\'odigo de barras con la c\'amara del celular.
+    \item[\color{umsablue}Registro de entradas de mercader\'ia] El administrador registra la compra a un proveedor con uno o varios productos, cantidades y costos; el stock aumenta autom\'aticamente.
+    \item[\color{umsablue}Registro de ventas] Administradores y empleados registran ventas con uno o varios productos. El sistema calcula el total, descuenta el stock y rechaza la venta si no hay existencias suficientes.
+    \item[\color{umsablue}Control de existencias y ajustes] El stock de cada producto se mantiene siempre actualizado y nunca puede quedar en negativo. El administrador puede corregir diferencias con un ajuste que queda registrado.
+    \item[\color{umsablue}Alertas de bajo stock] El panel principal y una pantalla propia muestran los productos cuyo stock es igual o menor que el m\'inimo.
+    \item[\color{umsablue}Historial de movimientos] Consulta de todas las entradas, ventas y ajustes con fecha, usuario, producto, cantidad y stock resultante. El empleado solo ve sus propios movimientos.
+    \item[\color{umsablue}Sincronizaci\'on multiplataforma] Todos los dispositivos trabajan sobre la misma base de datos, por lo que una venta hecha en el celular se ve en la computadora al actualizar la pantalla.
+    \item[\color{umsablue}Respaldo de la informaci\'on] Exportaci\'on peri\'odica del esquema y los datos para recuperarlos en caso de error.
+    \item[\color{umsablue}Reportes (opcional)] Gr\'aficas de los productos m\'as vendidos y exportaci\'on de reportes a CSV o PDF.
+\end{description}
+
+La \cref{fig:prototipos} muestra los prototipos de interfaz que elaboramos en la etapa de dise\~no: el panel principal en la versi\'on de escritorio y el registro de una venta en la versi\'on m\'ovil. Los valores que aparecen son datos de ejemplo.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[b]{0.62\textwidth}
+  \centering
+  \IfFileExists{panel-escritorio.png}{\includegraphics[width=\linewidth]{panel-escritorio.png}}{\fbox{\parbox[c][5cm][c]{0.9\linewidth}{\centering panel-escritorio.png}}}
+  \par\small (a) Panel principal, versi\'on web
+\end{minipage}\hfill
+\begin{minipage}[b]{0.3\textwidth}
+  \centering
+  \IfFileExists{venta-movil.png}{\includegraphics[width=\linewidth]{venta-movil.png}}{\fbox{\parbox[c][7cm][c]{0.9\linewidth}{\centering venta-movil.png}}}
+  \par\small (b) Registro de venta, versi\'on Android
+\end{minipage}
+\caption{Prototipos de interfaz de Inventario Cloud.}
+\label{fig:prototipos}
+\end{figure}
+
+%=============================================================================
+\begin{thebibliography}{99}
+%=============================================================================
+\addcontentsline{toc}{section}{Referencias}
+
+\bibitem{armbrust}
+Armbrust, M., Fox, A., Griffith, R., Joseph, A. D., Katz, R., Konwinski, A., Lee, G., Patterson, D., Rabkin, A., Stoica, I. y Zaharia, M. (2010).
+\newblock A view of cloud computing.
+\newblock \emph{Communications of the ACM}, 53(4), 50--58.
+
+\bibitem{fielding}
+Fielding, R. T. (2000).
+\newblock \emph{Architectural styles and the design of network-based software architectures}.
+\newblock Tesis doctoral, University of California, Irvine.
+
+\bibitem{flutter}
+Google. (s.f.).
+\newblock \emph{Flutter documentation}.
+\newblock \url{https://docs.flutter.dev}
+
+\bibitem{heizer}
+Heizer, J. y Render, B. (2014).
+\newblock \emph{Principios de administraci\'on de operaciones} (9.\textsuperscript{a} ed.).
+\newblock Pearson Educaci\'on.
+
+\bibitem{jwt}
+Jones, M., Bradley, J. y Sakimura, N. (2015).
+\newblock \emph{JSON Web Token (JWT)} (RFC 7519).
+\newblock Internet Engineering Task Force. \url{https://www.rfc-editor.org/rfc/rfc7519}
+
+\bibitem{nist}
+Mell, P. y Grance, T. (2011).
+\newblock \emph{The NIST definition of cloud computing} (Special Publication 800-145).
+\newblock National Institute of Standards and Technology.
+
+\bibitem{postgres}
+PostgreSQL Global Development Group. (s.f.).
+\newblock \emph{PostgreSQL documentation: Row security policies}.
+\newblock \url{https://www.postgresql.org/docs/current/ddl-rowsecurity.html}
+
+\bibitem{silberschatz}
+Silberschatz, A., Korth, H. F. y Sudarshan, S. (2020).
+\newblock \emph{Database system concepts} (7.\textsuperscript{a} ed.).
+\newblock McGraw-Hill.
+
+\bibitem{supabasedocs}
+Supabase. (s.f.).
+\newblock \emph{Supabase documentation}.
+\newblock \url{https://supabase.com/docs}
+
+\bibitem{supabasepricing}
+Supabase. (2026).
+\newblock \emph{Pricing}. Consultado el 21 de octubre de 2026.
+\newblock \url{https://supabase.com/pricing}
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,30 @@
+# Secretos y respaldos
+.env
+*.env
+*.key
+dart_defines.json
+respaldos/
+
+# Flutter / Dart
+app/build/
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/.packages
+app/android/local.properties
+app/android/.gradle/
+app/ios/Pods/
+*.iml
+.idea/
+
+# LaTeX
+informe/*.aux
+informe/*.log
+informe/*.fls
+informe/*.fdb_latexmk
+informe/*.out
+informe/*.synctex.gz
+
+# Sistema
+.DS_Store
+Thumbs.db
