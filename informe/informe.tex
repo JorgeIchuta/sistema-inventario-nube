@@ -179,7 +179,7 @@ En nuestro sistema cada producto tiene además un stock mínimo. Cuando el stock
 
 El NIST (Instituto Nacional de Estándares y Tecnología de Estados Unidos) define la computación en la nube como un modelo que permite usar, a través de internet y cuando uno lo necesite, recursos como servidores, almacenamiento y aplicaciones, sin tener que administrarlos directamente \cite{nist}. Según esta definición, la nube tiene cinco características: el usuario puede pedir recursos por su cuenta, se accede desde cualquier dispositivo con internet, los recursos se comparten entre muchos clientes, se pueden aumentar o reducir según la necesidad, y el uso se mide para cobrarlo o limitarlo.
 
-Para una tienda pequeña la ventaja es clara: en lugar de comprar un servidor, se paga solo por lo que se usa, y en proyectos pequeños muchas veces ni siquiera se paga porque alcanza con el plan gratuito \cite{armbrust}.
+Para una tienda pequeña la ventaja es clara: en lugar de comprar un servidor, se paga solo por lo que se usa, y en proyectos pequeños muchas veces ni siquiera se paga porque alcanza con el plan gratuito.
 
 Los servicios en la nube se suelen dividir en tres modelos. En IaaS (infraestructura como servicio) el proveedor da máquinas virtuales y el cliente instala todo lo demás, por ejemplo Amazon EC2. En PaaS (plataforma como servicio) el proveedor da un entorno listo para publicar aplicaciones, como Netlify. En SaaS (software como servicio) se usa una aplicación ya terminada, como Gmail o GitHub. Hay un cuarto tipo que usamos en este proyecto, el BaaS (backend como servicio), donde el proveedor ya da la base de datos, el inicio de sesión y la API, y el desarrollador solo tiene que hacer la parte visual.
 
@@ -187,21 +187,21 @@ También se habla de nube pública, privada, comunitaria e híbrida \cite{nist}.
 
 \subsection{Supabase}
 
-Supabase es una plataforma de código abierto del tipo BaaS que funciona sobre PostgreSQL \cite{supabasedocs}. Al crear un proyecto, Supabase entrega una base de datos, un servicio para registrar usuarios e iniciar sesión, y una API que se genera sola a partir de las tablas. También permite crear funciones dentro de la base de datos y llamarlas desde la aplicación. Tiene un plan gratuito que alcanza para proyectos pequeños como el nuestro \cite{supabasepricing}.
+Supabase es una plataforma de código abierto del tipo BaaS que funciona sobre PostgreSQL \cite{supabasedocs}. Al crear un proyecto, Supabase entrega una base de datos, un servicio para registrar usuarios e iniciar sesión, y una API que se genera sola a partir de las tablas. También permite crear funciones dentro de la base de datos y llamarlas desde la aplicación. Tiene un plan gratuito que alcanza para proyectos pequeños como el nuestro \cite{supabasedocs}.
 
 \subsection{Base de datos relacional y PostgreSQL}
 
 Una base de datos relacional guarda la información en tablas que se relacionan entre sí por medio de claves \cite{silberschatz}. La clave primaria identifica a cada registro y la clave foránea es un campo que apunta a un registro de otra tabla. Gracias a esto no se puede, por ejemplo, registrar la venta de un producto que no existe.
 
-PostgreSQL es un gestor de bases de datos libre y gratuito \cite{postgres}. De todo lo que ofrece, en el proyecto aprovechamos sobre todo cuatro cosas. La primera son las transacciones: una venta con varios productos se guarda completa o no se guarda nada. La segunda son las restricciones, que impiden guardar datos incorrectos, como un stock negativo o un código de producto repetido. La tercera son las funciones, que nos permiten registrar una venta, descontar el stock y guardar el movimiento en un solo paso. La cuarta es la seguridad por filas (RLS, \textit{Row Level Security}), que decide qué datos puede ver o cambiar cada usuario según su rol.
+PostgreSQL es un gestor de bases de datos libre y gratuito. De todo lo que ofrece, en el proyecto aprovechamos sobre todo cuatro cosas. La primera son las transacciones: una venta con varios productos se guarda completa o no se guarda nada. La segunda son las restricciones, que impiden guardar datos incorrectos, como un stock negativo o un código de producto repetido. La tercera son las funciones, que nos permiten registrar una venta, descontar el stock y guardar el movimiento en un solo paso. La cuarta es la seguridad por filas (RLS, \textit{Row Level Security}), que decide qué datos puede ver o cambiar cada usuario según su rol.
 
 \subsection{API, HTTPS y JSON}
 
-Una API es el intermediario entre la aplicación y la base de datos. La aplicación no se conecta directo a la base, sino que le hace pedidos a la API por internet. Supabase usa una API de tipo REST, un estilo propuesto por Fielding \cite{fielding} en el que se piden o envían datos usando los métodos de HTTP. Los datos viajan en formato JSON y por HTTPS, que cifra la información. Una ventaja de trabajar así es que la contraseña de la base de datos nunca queda guardada en los celulares ni en las computadoras.
+Una API es el intermediario entre la aplicación y la base de datos. La aplicación no se conecta directo a la base, sino que le hace pedidos a la API por internet. Supabase usa una API de tipo REST, que es una forma muy común de pedir y enviar datos por internet usando los métodos de HTTP. Los datos viajan en formato JSON y por HTTPS, que cifra la información. Una ventaja de trabajar así es que la contraseña de la base de datos nunca queda guardada en los celulares ni en las computadoras.
 
 \subsection{Inicio de sesión y roles}
 
-Para entrar al sistema cada persona usa su correo y su contraseña. Supabase revisa esos datos y, si son correctos, entrega un token (un JWT \cite{jwt}) que la aplicación envía en cada pedido. Con ese token la base de datos sabe quién está pidiendo los datos y qué puede hacer. Las contraseñas no se guardan tal cual, sino cifradas, y eso lo maneja Supabase.
+Para entrar al sistema cada persona usa su correo y su contraseña. Supabase revisa esos datos y, si son correctos, entrega un token (llamado JWT) que la aplicación envía en cada pedido. Con ese token la base de datos sabe quién está pidiendo los datos y qué puede hacer. Las contraseñas no se guardan tal cual, sino cifradas, y eso lo maneja Supabase.
 
 En el sistema hay dos roles. El administrador puede manejar todo: productos, categorías, proveedores, entradas y usuarios. El empleado puede ver los productos, registrar ventas y ver su propio historial.
 
@@ -211,7 +211,7 @@ Flutter es una herramienta gratuita de Google para hacer aplicaciones para celul
 
 La aplicación se acomoda al tamaño de la pantalla. En la computadora muestra un menú al costado y tablas, y en el celular una barra de menú abajo y tarjetas. A esto se le llama diseño adaptable o \textit{responsive}.
 
-Por último, aunque los datos estén en la nube, igual hay que sacar copias de respaldo. El plan gratuito de Supabase no las hace solo \cite{supabasepricing}, así que cada cierto tiempo exportamos la base de datos y la guardamos aparte.
+Por último, aunque los datos estén en la nube, igual hay que sacar copias de respaldo. El plan gratuito de Supabase no las hace solo \cite{supabasedocs}, así que cada cierto tiempo exportamos la base de datos y la guardamos aparte.
 
 %=============================================================================
 \section{Problemática -- Identificación del problema}\label{sec:problematica}
@@ -367,7 +367,7 @@ GitHub & SaaS & Guarda el código del proyecto y su historial de cambios. \\
 \label{tab:servicios}
 \end{table}
 
-Todo el proyecto se hizo con un presupuesto de Bs~0. En octubre de 2026 el plan gratuito de Supabase da 500~MB de base de datos, 1~GB para archivos, 5~GB de transferencia al mes y hasta dos proyectos activos \cite{supabasepricing}. Para una tienda esto alcanza de sobra. Lo que sí hay que tener en cuenta es que el plan gratuito no saca respaldos automáticos y que pausa el proyecto si pasa una semana sin usarse, por eso conviene entrar al sistema al menos una vez por semana.
+Todo el proyecto se hizo con un presupuesto de Bs~0. En octubre de 2026 el plan gratuito de Supabase da 500~MB de base de datos, 1~GB para archivos, 5~GB de transferencia al mes y hasta dos proyectos activos \cite{supabasedocs}. Para una tienda esto alcanza de sobra. Lo que sí hay que tener en cuenta es que el plan gratuito no saca respaldos automáticos y que pausa el proyecto si pasa una semana sin usarse, por eso conviene entrar al sistema al menos una vez por semana.
 
 \subsection{Modelo de la base de datos}
 
@@ -477,16 +477,6 @@ Respaldo & Exportar la base de datos para no perder la información. & Administr
 %=============================================================================
 \addcontentsline{toc}{section}{Referencias}
 
-\bibitem{armbrust}
-Armbrust, M., Fox, A., Griffith, R., Joseph, A. D., Katz, R., Konwinski, A., Lee, G., Patterson, D., Rabkin, A., Stoica, I. y Zaharia, M. (2010).
-\newblock A view of cloud computing.
-\newblock \emph{Communications of the ACM}, 53(4), 50--58.
-
-\bibitem{fielding}
-Fielding, R. T. (2000).
-\newblock \emph{Architectural styles and the design of network-based software architectures}.
-\newblock Tesis doctoral, University of California, Irvine.
-
 \bibitem{flutter}
 Google. (s.f.).
 \newblock \emph{Flutter documentation}.
@@ -497,20 +487,10 @@ Heizer, J. y Render, B. (2014).
 \newblock \emph{Principios de administraci\'on de operaciones} (9.\textsuperscript{a} ed.).
 \newblock Pearson Educaci\'on.
 
-\bibitem{jwt}
-Jones, M., Bradley, J. y Sakimura, N. (2015).
-\newblock \emph{JSON Web Token (JWT)} (RFC 7519).
-\newblock Internet Engineering Task Force. \url{https://www.rfc-editor.org/rfc/rfc7519}
-
 \bibitem{nist}
 Mell, P. y Grance, T. (2011).
 \newblock \emph{The NIST definition of cloud computing} (Special Publication 800-145).
 \newblock National Institute of Standards and Technology.
-
-\bibitem{postgres}
-PostgreSQL Global Development Group. (s.f.).
-\newblock \emph{PostgreSQL documentation: Row security policies}.
-\newblock \url{https://www.postgresql.org/docs/current/ddl-rowsecurity.html}
 
 \bibitem{silberschatz}
 Silberschatz, A., Korth, H. F. y Sudarshan, S. (2020).
@@ -521,11 +501,6 @@ Silberschatz, A., Korth, H. F. y Sudarshan, S. (2020).
 Supabase. (s.f.).
 \newblock \emph{Supabase documentation}.
 \newblock \url{https://supabase.com/docs}
-
-\bibitem{supabasepricing}
-Supabase. (2026).
-\newblock \emph{Pricing}. Consultado el 21 de octubre de 2026.
-\newblock \url{https://supabase.com/pricing}
 
 \end{thebibliography}
 
