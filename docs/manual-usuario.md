@@ -1,6 +1,6 @@
 # Manual de usuario: Inventario Cloud
 
-Inventario Cloud funciona igual en el **celular Android** (app instalada con el archivo APK) y en la **computadora** (navegador Chrome, Edge o Firefox). Los datos son los mismos en todos los dispositivos.
+Inventario Cloud funciona igual en el **celular** y en la **computadora**: solo hay que abrir https://melodic-melomakarona-8b8ae7.netlify.app en el navegador. Los datos son los mismos en todos los dispositivos.
 
 ## 1. Ingresar
 

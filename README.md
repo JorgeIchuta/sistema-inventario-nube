@@ -20,7 +20,7 @@ La falta de un control centralizado también puede ocasionar que algunos product
 
 Por esta razón, se propone desarrollar un sistema multiplataforma de inventario conectado a una base de datos en la nube. El sistema permitirá almacenar y consultar de forma centralizada la información de productos, categorías, proveedores, existencias, entradas y ventas. También generará alertas cuando un producto alcance un nivel mínimo de existencias.
 
-Los empleados y administradores podrán utilizar el sistema desde celulares Android y computadoras. En el celular se instalará como una aplicación mediante un archivo APK, mientras que en la computadora se podrá abrir desde un navegador web. La base de datos en la nube permitirá que la información permanezca sincronizada entre todos los dispositivos autorizados y ofrecerá mejores opciones de seguridad, respaldo y disponibilidad.
+Los empleados y administradores podrán utilizar el sistema desde celulares y computadoras. En ambos casos se abrirá como una aplicación web desde el navegador, sin instalar nada. La base de datos en la nube permitirá que la información permanezca sincronizada entre todos los dispositivos autorizados y ofrecerá mejores opciones de seguridad, respaldo y disponibilidad.
 
 ## Objetivo general
 
@@ -42,9 +42,9 @@ Desarrollar un sistema multiplataforma de inventario para una tienda, accesible 
 
 ## Propuesta de solución
 
-La solución consistirá en una aplicación multiplataforma mediante la cual los usuarios autorizados podrán administrar el inventario desde un celular Android o una computadora. La versión para celular se distribuirá como un archivo APK y la versión para computadora funcionará como una aplicación web desde el navegador.
+La solución consistirá en una aplicación multiplataforma mediante la cual los usuarios autorizados podrán administrar el inventario desde un celular o una computadora. El sistema funcionará como una aplicación web que se abre desde el navegador de cualquier dispositivo.
 
-Ambas versiones compartirán el mismo código base desarrollado con Flutter y se comunicarán con una API alojada en la nube. La API será responsable de validar las solicitudes y acceder a la base de datos PostgreSQL.
+La aplicación se desarrollará con Flutter y se comunicarán con una API alojada en la nube. La API será responsable de validar las solicitudes y acceder a la base de datos PostgreSQL.
 
 La aplicación no se conectará directamente a la base de datos. El uso de una API evitará exponer las credenciales en celulares o computadoras y permitirá controlar qué operaciones puede realizar cada usuario.
 
@@ -113,14 +113,12 @@ Estos recursos son suficientes para almacenar los productos, categorías, provee
 
 ## Distribución de la aplicación
 
-El sistema tendrá dos formas de acceso:
+El sistema se usa como aplicación web, publicada gratis en Netlify: https://melodic-melomakarona-8b8ae7.netlify.app
 
-- **Celular:** aplicación Android instalada mediante un archivo APK.
-- **Computadora:** aplicación web abierta desde un navegador, como Chrome, Edge o Firefox.
+- **Celular:** se abre desde el navegador del celular. La pantalla se acomoda con una barra de menú abajo.
+- **Computadora:** se abre desde Chrome, Edge o Firefox, con un menú lateral.
 
-De esta forma no será necesario crear dos sistemas independientes. Flutter permitirá reutilizar la mayor parte del código y adaptar la interfaz al tamaño de la pantalla utilizada.
-
-La publicación en Google Play o Apple App Store queda fuera del alcance del proyecto, ya que puede implicar costos de registro. Esto no afecta la instalación ni la demostración académica de la aplicación en dispositivos autorizados.
+No se genera una aplicación instalable (APK) ni se publica en Google Play o App Store. Así no hace falta instalar nada y todos usan la misma versión.
 
 ## Seguridad básica
 

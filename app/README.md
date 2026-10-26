@@ -1,6 +1,6 @@
 # App Flutter: Inventario Cloud
 
-Una sola base de código para **Android (APK)** y **web**.
+Aplicación **web** (se usa desde el navegador del celular o de la computadora).
 
 ## Primera vez
 
@@ -28,7 +28,6 @@ flutter run -d android --dart-define-from-file=dart_defines.json   # celular o e
 ## Compilar
 
 ```bash
-flutter build apk --release --dart-define-from-file=dart_defines.json
 flutter build web --release --dart-define-from-file=dart_defines.json
 ```
 
@@ -42,11 +41,6 @@ flutter test
 
 `test/widget_test.dart` contiene las pruebas unitarias: regla de stock, formato en Bs, folios, validadores y mensajes de error. Si `flutter create` generó otro `widget_test.dart`, reemplázalo por el de este repositorio.
 
-## Instalar el APK en un celular
-
-1. `flutter build apk --release --dart-define-from-file=dart_defines.json`
-2. El archivo queda en `build/app/outputs/flutter-apk/app-release.apk`.
-3. Pásalo al celular (cable, Drive o WhatsApp), ábrelo y permite "instalar apps desconocidas" para ese origen.
 
 ## Publicar la versión web (gratis)
 

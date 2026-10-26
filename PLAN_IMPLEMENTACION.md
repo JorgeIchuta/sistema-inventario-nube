@@ -27,7 +27,7 @@ Este documento es la guía completa para construir el sistema. Está escrito par
 | --- | --- |
 | Nombre | Inventario Cloud |
 | Qué es | Sistema de inventario para **una** tienda: productos, categorías, proveedores, entradas, ventas, alertas de bajo stock e historial |
-| Clientes | App **Android** (archivo APK, sin Google Play) y app **web** (navegador de PC), ambas con **un solo código Flutter** |
+| Clientes | App **web** hecha con Flutter, usada desde el navegador del celular y de la PC. Sin APK (decisión del equipo) |
 | Backend | **Supabase Free**: Auth + API REST/RPC + PostgreSQL. Sin servidor propio |
 | Roles | `administrador` (todo) y `empleado` (consulta productos, registra ventas y ve sus propios movimientos) |
 | Seguridad | RLS en todas las tablas; el stock solo cambia a través de 3 funciones de PostgreSQL |
@@ -125,7 +125,7 @@ Abre `diseno/template/index.html` en un navegador: es la referencia visual y de 
 
 - **Hanken Grotesk** (400/500/600/700) para todo el texto.
 - **JetBrains Mono** (500) para códigos/SKU, cantidades, montos y folios.
-- Empaqueta las fuentes como assets (`assets/fonts/`) para que el APK funcione sin descargarlas.
+- Las fuentes se cargan con `google_fonts`.
 - Títulos de página: 26–34 px en negrita. Texto normal: 14–16 px.
 
 ### 3.3 Formas y espaciado
@@ -564,7 +564,7 @@ Cada fase indica su objetivo, sus tareas y sus criterios de aceptación. Las pru
   - Cálculo del total del carrito.
 - [ ] Ejecutar CP-01 a CP-17 en Android y en web. Guardar evidencias (capturas) en `docs/evidencias/`.
 - [ ] Revisar textos, mensajes de error, estados vacíos ("No se encontraron productos") y accesibilidad (insignias con texto, no solo color).
-- [ ] `flutter build apk --release --dart-define=...` e instalar en al menos 2 celulares.
+- [x] ~~APK~~: no se realizará; el celular usa la versión web.
 - [x] `flutter build web --release --dart-define=...` y publicar `app/build/web` en Netlify o Cloudflare Pages. Configurar la URL resultante en Supabase → Authentication → URL Configuration.
 - [ ] Respaldo final y **prueba de recuperación**: crear un segundo proyecto gratuito, aplicar las migraciones, cargar el respaldo y verificar.
 - [x] `app/README.md` con instrucciones para ejecutar, compilar y desplegar. Manual de usuario breve en `docs/manual-usuario.md`.
@@ -573,7 +573,7 @@ Cada fase indica su objetivo, sus tareas y sus criterios de aceptación. Las pru
 **Aceptación:**
 - Todas las pruebas de prioridad alta pasan.
 - Se demuestra la sincronización entre Android y PC.
-- Hay un APK y una URL web funcionando.
+- Hay una URL web funcionando.
 - Ninguna clave está en Git.
 - No se contrató nada de pago.
 
@@ -639,5 +639,5 @@ Anota aquí al terminar cada fase: la fecha, quién la hizo, qué quedó pendien
 | 2 | 21/10/2026 | Código escrito | Falta: `flutter create .` + `flutter pub get` y probar en Chrome y Android (no se pudo compilar en el entorno de Claude) |
 | 3 | 21/10/2026 | Código escrito | Falta compilar y probar CP-04, 05, 06, 12 y 14 |
 | 4 | 21/10/2026 | Código escrito | Falta compilar y probar CP-07 a CP-11 y CP-13. Gráfico semanal sin fl_chart (barras propias) |
-| 5 | 21/10/2026 | Documentación y pruebas escritas | flutter test OK (15/15). Web publicada: https://melodic-melomakarona-8b8ae7.netlify.app (26/10/2026). Falta: ejecutar CP-01 a CP-17 (docs/resultados-pruebas.md), compilar APK, respaldo y prueba de recuperación (supabase/RESPALDO.md), ensayo |
+| 5 | 21/10/2026 | Documentación y pruebas escritas | flutter test OK (15/15). Web publicada: https://melodic-melomakarona-8b8ae7.netlify.app (26/10/2026). Falta: ejecutar CP-01 a CP-17 (docs/resultados-pruebas.md), respaldo y prueba de recuperación (supabase/RESPALDO.md), ensayo |
 | 6 |  | Opcional |  |

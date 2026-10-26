@@ -6,7 +6,7 @@ Estado: **pendiente de ejecutar**. Se avanza fase por fase; una fase termina sol
 
 ## Decisiones tomadas
 
-- Flutter (un solo código) para Android (APK) y web; Supabase Free (Auth + API REST/RPC + PostgreSQL); costo $0.
+- Flutter (un solo código) para la web (celular y computadora desde el navegador); Supabase Free (Auth + API REST/RPC + PostgreSQL); costo $0.
 - La app usa solo la URL y la clave pública (`anon`), pasadas con `--dart-define`. La clave `service_role` nunca va en la app ni en Git.
 - El stock solo cambia mediante 3 funciones de PostgreSQL (`registrar_entrada`, `registrar_venta`, `registrar_ajuste`), cada una en una sola transacción.
 - RLS activado en todas las tablas; la seguridad real está en la base.
@@ -108,7 +108,7 @@ Salida: CP-07 a CP-11 y CP-13.
 ### Fase 5 · Pruebas y entrega (semana 6)
 - [ ] Ejecutar CP-01 a CP-17 y guardar evidencias
 - [ ] Corregir errores y textos
-- [ ] `flutter build apk --release`, instalar en 2 celulares
+- Sin APK (decisión del equipo): el celular usa la versión web.
 - [ ] `flutter build web` y publicar
 - [ ] Respaldo final y prueba de recuperación en un segundo proyecto
 - [ ] Manual breve, diapositivas, ensayo del guion de demostración

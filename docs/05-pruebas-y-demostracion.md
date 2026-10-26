@@ -27,7 +27,7 @@
 - Resultado de cada caso de prueba.
 - Capturas antes y después de una entrada y una venta.
 - Evidencia de una operación rechazada por stock insuficiente.
-- Archivo APK final.
+- Dirección de la versión web publicada.
 - Respaldo manual del esquema y datos ficticios.
 
 ## Datos para la demostración
@@ -62,7 +62,7 @@ Nunca se deben utilizar contraseñas personales ni información real de clientes
 
 - Confirmar que el proyecto gratuito de Supabase no esté pausado.
 - Probar la conexión a Internet disponible.
-- Instalar y abrir el APK antes de la presentación.
+- Abrir la versión web en el celular antes de la presentación.
 - Mantener abierta la versión web en la computadora.
 - Verificar las cuentas y datos ficticios.
 - Realizar un respaldo manual.

@@ -17,12 +17,12 @@
 
 ## Adaptación por dispositivo
 
-### Celular Android
+### Celular (navegador)
 
 - Navegación inferior o menú lateral compacto.
 - Botones grandes y formularios en una sola columna.
 - Posibilidad de utilizar la cámara para leer códigos de barras.
-- Instalación mediante APK, sin tienda de aplicaciones.
+- Se abre desde el navegador del celular, sin instalar nada.
 
 ### Computadora
 

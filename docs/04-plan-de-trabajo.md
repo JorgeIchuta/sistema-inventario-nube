@@ -22,7 +22,7 @@ Todos los integrantes deben revisar cambios, probar la aplicación y comprender 
 | 3 | Crear proyecto Flutter, navegación, inicio de sesión y diseño adaptable | Acceso desde Android y web |
 | 4 | Implementar productos, categorías, proveedores y entradas | Catálogos y entradas funcionales |
 | 5 | Implementar ventas, stock, alertas e historial | Flujo principal completo |
-| 6 | Ejecutar pruebas, corregir errores, generar APK y preparar exposición | Prototipo y documentación final |
+| 6 | Ejecutar pruebas, corregir errores, publicar la web y preparar exposición | Prototipo y documentación final |
 
 ## Tablero mínimo de tareas
 
@@ -37,7 +37,7 @@ Todos los integrantes deben revisar cambios, probar la aplicación y comprender 
 - Implementar cada pantalla y sus validaciones.
 - Probar sincronización entre dispositivos.
 - Exportar respaldo manual.
-- Generar el APK y desplegar la web en una opción gratuita.
+- Desplegar la web en una opción gratuita (Netlify).
 - Preparar diapositivas y guion de demostración.
 
 ## Herramientas gratuitas acordadas
@@ -50,7 +50,7 @@ Todos los integrantes deben revisar cambios, probar la aplicación y comprender 
 | Emulador y compilación Android | Android Studio | $0 |
 | Control de versiones | Git y GitHub Free | $0 |
 | Pruebas web | Chrome, Edge o Firefox | $0 |
-| Distribución Android | Archivo APK | $0 |
+| Publicación web | Netlify | $0 |
 
 No se utilizarán servicios que exijan un plan de pago. Antes de activar cualquier función adicional, el equipo deberá comprobar que está incluida en el plan gratuito. No se publicará la aplicación en tiendas.
 

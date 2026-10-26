@@ -152,7 +152,7 @@ El control del inventario es una de las tareas m\'as importantes de cualquier ti
 
 Este tipo de registro funciona mientras el negocio es peque\~no, pero con el tiempo empieza a fallar: las cantidades anotadas no coinciden con lo que hay en el almac\'en, se repiten registros, se pierden hojas y nadie sabe con certeza qu\'e productos est\'an por agotarse. Adem\'as, si el due\~no est\'a fuera de la tienda o si dos empleados venden al mismo tiempo, no hay forma sencilla de compartir la informaci\'on actualizada.
 
-Durante el semestre, en la materia de Computaci\'on en la Nube, estudiamos c\'omo los servicios en la nube permiten acceder a recursos de c\'omputo y almacenamiento desde cualquier lugar, sin necesidad de comprar ni mantener servidores propios. Tomando esa idea como base, en el presente proyecto proponemos \textbf{Inventario Cloud}, un sistema multiplataforma de inventario para una tienda que funciona como aplicaci\'on Android (instalada mediante un archivo APK) y como aplicaci\'on web desde el navegador de una computadora.
+Durante el semestre, en la materia de Computaci\'on en la Nube, estudiamos c\'omo los servicios en la nube permiten acceder a recursos de c\'omputo y almacenamiento desde cualquier lugar, sin necesidad de comprar ni mantener servidores propios. Tomando esa idea como base, en el presente proyecto proponemos \textbf{Inventario Cloud}, un sistema multiplataforma de inventario para una tienda que funciona como aplicaci\'on web: se abre desde el navegador del celular o de la computadora, sin tener que instalar nada.
 
 Ambas versiones se desarrollan con \textbf{Flutter} y se conectan a una sola base de datos \textbf{PostgreSQL} alojada en \textbf{Supabase}, utilizando \'unicamente su plan gratuito. As\'i, una venta registrada desde el celular del empleado se refleja en la computadora del administrador, y todo el proyecto puede desarrollarse y demostrarse con un presupuesto de \textbf{Bs~0}.
 
@@ -243,14 +243,9 @@ El sistema aplica un \textbf{control de acceso basado en roles} con dos perfiles
 
 \subsection{Desarrollo multiplataforma con Flutter}
 
-Flutter es un \textit{framework} gratuito y de c\'odigo abierto creado por Google que permite construir aplicaciones para Android, iOS, web y escritorio a partir de un \textbf{\'unico c\'odigo fuente} escrito en el lenguaje Dart \cite{flutter}. En este proyecto lo usamos para generar dos versiones del mismo sistema:
+Flutter es un \textit{framework} gratuito y de c\'odigo abierto creado por Google que permite construir aplicaciones para Android, iOS, web y escritorio a partir de un \textbf{\'unico c\'odigo fuente} escrito en el lenguaje Dart \cite{flutter}. En este proyecto lo usamos para crear una \textbf{aplicaci\'on web}, publicada de forma gratuita en Netlify, que se abre desde el navegador (Chrome, Edge o Firefox) de cualquier celular o computadora.
 
-\begin{itemize}
-    \item Un archivo \textbf{APK} que se instala directamente en celulares Android, sin necesidad de publicarlo en Google Play.
-    \item Una \textbf{aplicaci\'on web} que se abre desde Chrome, Edge o Firefox en cualquier computadora.
-\end{itemize}
-
-Ambas versiones comparten la l\'ogica del negocio y adaptan la interfaz al tama\~no de la pantalla, lo que se conoce como dise\~no adaptable o \textit{responsive}.
+La misma aplicaci\'on se acomoda al tama\~no de la pantalla: en la computadora muestra un men\'u lateral y tablas, y en el celular una barra de men\'u abajo y tarjetas. A esto se le llama dise\~no adaptable o \textit{responsive}.
 
 \subsection{Disponibilidad y respaldo de la informaci\'on}
 
@@ -318,7 +313,7 @@ En el \cref{tab:causas} relacionamos cada causa con su consecuencia y con la for
 \textbf{\color{umsablue}Causa} & \textbf{\color{umsablue}Consecuencia} & \textbf{\color{umsablue}Respuesta del sistema} \\
 \midrule
 Registro manual de entradas y ventas & Errores de captura, duplicados y stock incorrecto & Formularios con validaci\'on y actualizaci\'on autom\'atica del stock \\
-Informaci\'on en una sola computadora & No se puede consultar desde otros dispositivos; riesgo de p\'erdida & Base de datos \'unica en la nube, accesible desde Android y PC \\
+Informaci\'on en una sola computadora & No se puede consultar desde otros dispositivos; riesgo de p\'erdida & Base de datos \'unica en la nube, accesible desde el celular y la PC \\
 Ausencia de alertas & Productos agotados sin aviso & Alerta cuando el stock es igual o menor que el m\'inimo \\
 Sin historial de movimientos & No se sabe cu\'ando ni por qu\'e cambi\'o el stock & Registro autom\'atico de cada entrada, venta y ajuste \\
 Sin control de usuarios & Cualquiera puede modificar los datos & Inicio de sesi\'on y permisos por rol \\
@@ -334,7 +329,7 @@ Sin copias de seguridad & P\'erdida definitiva ante una falla & Respaldos manual
 A partir del an\'alisis anterior, formulamos el problema de investigaci\'on con la siguiente pregunta:
 
 \begin{quote}
-\itshape ?`C\'omo centralizar y mantener actualizada la informaci\'on del inventario de una tienda, de forma que pueda consultarse y modificarse de manera segura y sincronizada desde celulares Android y computadoras, sin incurrir en costos de infraestructura?
+\itshape ?`C\'omo centralizar y mantener actualizada la informaci\'on del inventario de una tienda, de forma que pueda consultarse y modificarse de manera segura y sincronizada desde celulares y computadoras, sin incurrir en costos de infraestructura?
 \end{quote}
 
 %=============================================================================
@@ -343,7 +338,7 @@ A partir del an\'alisis anterior, formulamos el problema de investigaci\'on con 
 
 \subsection{Objetivo general}
 
-Desarrollar un sistema multiplataforma de inventario para una tienda, accesible desde celulares Android y computadoras, conectado mediante una API a una base de datos en la nube, que permita registrar, organizar y consultar productos, categor\'ias, proveedores, existencias, entradas y ventas, con el prop\'osito de mejorar el control del inventario, reducir errores y facilitar el acceso sincronizado a la informaci\'on desde diferentes dispositivos.
+Desarrollar un sistema multiplataforma de inventario para una tienda, accesible desde celulares y computadoras, conectado mediante una API a una base de datos en la nube, que permita registrar, organizar y consultar productos, categor\'ias, proveedores, existencias, entradas y ventas, con el prop\'osito de mejorar el control del inventario, reducir errores y facilitar el acceso sincronizado a la informaci\'on desde diferentes dispositivos.
 
 \subsection{Objetivos espec\'ificos}
 
@@ -378,8 +373,8 @@ Inventario Cloud se apoya en servicios de nube gratuitos para funcionar y, a su 
                text width=7.9cm, minimum height=1.4cm, fill=umsablue!18, font=\small},
     flecha/.style={-{Stealth}, thick, color=umsablue}
 ]
-\node[cliente] (cel) at (0, 1.2) {\textbf{Celular Android}\\ App Flutter (APK)};
-\node[cliente] (pc)  at (0, -1.2) {\textbf{Computadora}\\ App Flutter web};
+\node[cliente] (cel) at (0, 1.2) {\textbf{Celular}\\ navegador web};
+\node[cliente] (pc)  at (0, -1.2) {\textbf{Computadora}\\ navegador web};
 \node[servicio] (auth) at (5.9, 1.5) {\textbf{Supabase Auth}\\ inicio de sesi\'on};
 \node[servicio] (api)  at (10.2, 1.5) {\textbf{API REST y RPC}\\ consultas y funciones};
 \node[bd] (pg) at (8.05, -1.0) {\textbf{PostgreSQL}\\ tablas, funciones y pol\'iticas RLS};
@@ -414,7 +409,7 @@ Row Level Security & BaaS & Pol\'iticas que limitan qu\'e filas puede leer o mod
 Supabase Storage (opcional) & BaaS & Almacenamiento de archivos para las fotograf\'ias de los productos. \\
 Supabase Realtime (opcional) & BaaS & Avisa a los dispositivos conectados cuando cambian los datos, para actualizar el stock en pantalla sin refrescar. \\
 Supabase Edge Functions (opcional) & FaaS & Funciones \textit{serverless} para tareas con permisos administrativos, como crear cuentas desde la aplicaci\'on. \\
-Netlify o Cloudflare Pages & PaaS & Alojamiento gratuito de la versi\'on web (resultado de \texttt{flutter build web}). \\
+Netlify & PaaS & Alojamiento gratuito de la aplicaci\'on web. El sistema est\'a publicado en \url{https://melodic-melomakarona-8b8ae7.netlify.app}. \\
 GitHub & SaaS & Repositorio del c\'odigo fuente y de los scripts SQL, con control de versiones y trabajo por ramas. \\
 \bottomrule
 \end{tabularx}
@@ -535,12 +530,12 @@ La \cref{fig:prototipos} muestra los prototipos de interfaz que elaboramos en la
 \begin{minipage}[b]{0.62\textwidth}
   \centering
   \IfFileExists{panel-escritorio.png}{\includegraphics[width=\linewidth]{panel-escritorio.png}}{\fbox{\parbox[c][5cm][c]{0.9\linewidth}{\centering panel-escritorio.png}}}
-  \par\small (a) Panel principal, versi\'on web
+  \par\small (a) Panel principal en la computadora
 \end{minipage}\hfill
 \begin{minipage}[b]{0.3\textwidth}
   \centering
   \IfFileExists{venta-movil.png}{\includegraphics[width=\linewidth]{venta-movil.png}}{\fbox{\parbox[c][7cm][c]{0.9\linewidth}{\centering venta-movil.png}}}
-  \par\small (b) Registro de venta, versi\'on Android
+  \par\small (b) Registro de venta en el celular
 \end{minipage}
 \caption{Prototipos de interfaz de Inventario Cloud.}
 \label{fig:prototipos}

@@ -2,7 +2,7 @@
 
 ## Alcance de la primera versión
 
-El sistema permitirá controlar el inventario de una sola tienda desde celulares Android y computadoras. La aplicación Android se instalará mediante un archivo APK y la versión para computadora se abrirá desde un navegador web. Ambas utilizarán la misma base de datos PostgreSQL alojada en Supabase Free.
+El sistema permitirá controlar el inventario de una sola tienda desde celulares y computadoras. En los dos casos se usará la aplicación web desde el navegador, y utilizará la misma base de datos PostgreSQL alojada en Supabase Free.
 
 ### Funciones obligatorias
 
