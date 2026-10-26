@@ -26,7 +26,7 @@
 \usepackage{xcolor}
 \usepackage{tcolorbox}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,calc}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,shapes.multipart,fit,calc}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{caption}
@@ -443,6 +443,68 @@ Inactividad & Pausa tras 1 semana sin uso & Ingresar al sistema antes de cada pr
 \caption{L\'imites del plan gratuito de Supabase.}
 \label{tab:limites}
 \end{table}
+
+\subsection{Modelo de la base de datos}
+
+La base de datos del sistema está en PostgreSQL, dentro de Supabase. Antes de crear las tablas hicimos el modelo entidad-relación, que se muestra en la \cref{fig:er}. Cada recuadro es una tabla y debajo del nombre están sus campos. \textbf{PK} es la clave primaria de la tabla y \textbf{FK} es una clave foránea, o sea, un campo que apunta a otra tabla. En las líneas, el \textbf{1} y la \textbf{N} indican cuántos registros se relacionan de cada lado.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    entidad/.style={rectangle split, rectangle split parts=2, draw=umsablue, thick,
+                    rectangle split part fill={umsablue, white}, align=left,
+                    text width=3.75cm, font=\scriptsize, inner sep=3pt, anchor=north},
+    rel/.style={thick, color=umsablue},
+    card/.style={font=\scriptsize\bfseries, fill=white, inner sep=1pt}
+]
+% Fila superior
+\node[entidad] (prov) at (0,0) {\textcolor{white}{\textbf{PROVEEDORES}}
+  \nodepart{second} id (PK)\\ nombre\\ telefono\\ correo\\ direccion\\ activo};
+\node[entidad] (ent) at (5.35,0) {\textcolor{white}{\textbf{ENTRADAS}}
+  \nodepart{second} id (PK)\\ proveedor\_id (FK)\\ usuario\_id (FK)\\ total\\ observaciones\\ clave\_operacion\\ creado\_en};
+\node[entidad] (dent) at (10.7,0) {\textcolor{white}{\textbf{DETALLE\_ENTRADAS}}
+  \nodepart{second} id (PK)\\ entrada\_id (FK)\\ producto\_id (FK)\\ cantidad\\ costo\_unitario};
+% Fila del medio
+\node[entidad] (perf) at (0,-3.9) {\textcolor{white}{\textbf{PERFILES}}
+  \nodepart{second} id (PK, FK a auth.users)\\ nombre\\ rol\\ activo\\ creado\_en};
+\node[entidad] (mov) at (5.35,-3.9) {\textcolor{white}{\textbf{MOVIMIENTOS\_\allowbreak INVENTARIO}}
+  \nodepart{second} id (PK)\\ producto\_id (FK)\\ usuario\_id (FK)\\ tipo\\ cantidad\\ stock\_anterior\\ stock\_resultante\\ referencia\_tipo\\ referencia\_id\\ observaciones\\ creado\_en};
+\node[entidad] (prod) at (10.7,-3.9) {\textcolor{white}{\textbf{PRODUCTOS}}
+  \nodepart{second} id (PK)\\ codigo\\ nombre\\ descripcion\\ categoria\_id (FK)\\ precio\_venta\\ stock\_actual\\ stock\_minimo\\ activo};
+% Fila inferior
+\node[entidad] (ven) at (0,-10.1) {\textcolor{white}{\textbf{VENTAS}}
+  \nodepart{second} id (PK)\\ usuario\_id (FK)\\ total\\ observaciones\\ clave\_operacion\\ creado\_en};
+\node[entidad] (dven) at (5.35,-10.1) {\textcolor{white}{\textbf{DETALLE\_VENTAS}}
+  \nodepart{second} id (PK)\\ venta\_id (FK)\\ producto\_id (FK)\\ cantidad\\ precio\_unitario\\ subtotal};
+\node[entidad] (cat) at (10.7,-10.1) {\textcolor{white}{\textbf{CATEGORIAS}}
+  \nodepart{second} id (PK)\\ nombre\\ descripcion\\ activo};
+% Relaciones
+\draw[rel] (prov) -- node[card, pos=0.15]{1} node[card, pos=0.85]{N} (ent);
+\draw[rel] (ent) -- node[card, pos=0.15]{1} node[card, pos=0.85]{N} (dent);
+\draw[rel] (prod) -- node[card, pos=0.2]{1} node[card, pos=0.8]{N} (dent);
+\draw[rel] (cat) -- node[card, pos=0.2]{1} node[card, pos=0.8]{N} (prod);
+\draw[rel] (perf) -- node[card, pos=0.15]{1} node[card, pos=0.85]{N} (mov);
+\draw[rel] (prod) -- node[card, pos=0.15]{1} node[card, pos=0.85]{N} (mov);
+\draw[rel] (perf) -- node[card, pos=0.15]{1} node[card, pos=0.85]{N} (ent);
+\draw[rel] (perf) -- node[card, pos=0.2]{1} node[card, pos=0.8]{N} (ven);
+\draw[rel] (ven) -- node[card, pos=0.15]{1} node[card, pos=0.85]{N} (dven);
+\draw[rel] (prod) -- node[card, pos=0.15]{1} node[card, pos=0.85]{N} (dven);
+\end{tikzpicture}
+\caption{Modelo entidad-relación de la base de datos.}
+\label{fig:er}
+\end{figure}
+
+Las relaciones del modelo se leen así:
+
+\begin{itemize}
+    \item Una categoría tiene muchos productos, y cada producto pertenece a una sola categoría.
+    \item Un proveedor puede tener muchas entradas de mercadería.
+    \item Cada entrada y cada venta tienen su detalle, donde se guarda qué productos entraron o se vendieron, en qué cantidad y a qué precio.
+    \item Un usuario puede registrar muchas entradas, ventas y movimientos.
+    \item Cada vez que cambia el stock de un producto se guarda un registro en movimientos de inventario. Así sabemos quién hizo el cambio, cuándo lo hizo y cuánto stock había antes y después.
+\end{itemize}
+
+La tabla de perfiles está unida a la tabla de usuarios de Supabase (\texttt{auth.users}), que es donde se guardan los correos y las contraseñas. En nuestras tablas no guardamos ninguna contraseña. Además, el stock de los productos no se puede cambiar a mano: solo cambia cuando se registra una entrada, una venta o un ajuste.
 
 \FloatBarrier
 \subsection{Servicios que ofrece el sistema}

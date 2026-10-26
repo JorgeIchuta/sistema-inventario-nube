@@ -1,5 +1,7 @@
 # Sistema multiplataforma de inventario para una tienda con base de datos en la nube
 
+**Aplicación web publicada:** https://melodic-melomakarona-8b8ae7.netlify.app
+
 ## Documentación del proyecto
 
 - [Alcance, usuarios y requisitos](docs/01-alcance-y-requisitos.md)

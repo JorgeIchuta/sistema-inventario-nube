@@ -565,7 +565,7 @@ Cada fase indica su objetivo, sus tareas y sus criterios de aceptación. Las pru
 - [ ] Ejecutar CP-01 a CP-17 en Android y en web. Guardar evidencias (capturas) en `docs/evidencias/`.
 - [ ] Revisar textos, mensajes de error, estados vacíos ("No se encontraron productos") y accesibilidad (insignias con texto, no solo color).
 - [ ] `flutter build apk --release --dart-define=...` e instalar en al menos 2 celulares.
-- [ ] `flutter build web --release --dart-define=...` y publicar `app/build/web` en Netlify o Cloudflare Pages. Configurar la URL resultante en Supabase → Authentication → URL Configuration.
+- [x] `flutter build web --release --dart-define=...` y publicar `app/build/web` en Netlify o Cloudflare Pages. Configurar la URL resultante en Supabase → Authentication → URL Configuration.
 - [ ] Respaldo final y **prueba de recuperación**: crear un segundo proyecto gratuito, aplicar las migraciones, cargar el respaldo y verificar.
 - [x] `app/README.md` con instrucciones para ejecutar, compilar y desplegar. Manual de usuario breve en `docs/manual-usuario.md`.
 - [ ] Ensayar el guion de demostración (`docs/05-pruebas-y-demostracion.md`).
@@ -639,5 +639,5 @@ Anota aquí al terminar cada fase: la fecha, quién la hizo, qué quedó pendien
 | 2 | 21/10/2026 | Código escrito | Falta: `flutter create .` + `flutter pub get` y probar en Chrome y Android (no se pudo compilar en el entorno de Claude) |
 | 3 | 21/10/2026 | Código escrito | Falta compilar y probar CP-04, 05, 06, 12 y 14 |
 | 4 | 21/10/2026 | Código escrito | Falta compilar y probar CP-07 a CP-11 y CP-13. Gráfico semanal sin fl_chart (barras propias) |
-| 5 | 21/10/2026 | Documentación y pruebas escritas | Falta en la PC: flutter test, ejecutar CP-01 a CP-17 (docs/resultados-pruebas.md), compilar APK, publicar web, respaldo y prueba de recuperación (supabase/RESPALDO.md), ensayo |
+| 5 | 21/10/2026 | Documentación y pruebas escritas | flutter test OK (15/15). Web publicada: https://melodic-melomakarona-8b8ae7.netlify.app (26/10/2026). Falta: ejecutar CP-01 a CP-17 (docs/resultados-pruebas.md), compilar APK, respaldo y prueba de recuperación (supabase/RESPALDO.md), ensayo |
 | 6 |  | Opcional |  |
